@@ -1,0 +1,18 @@
+{ "backgroundcolor":"#008751",
+ "columns":16,
+ "grid":
+    {
+     "height":0,
+     "orientation":"orthogonal",
+     "width":0
+    },
+ "margin":0,
+ "name":"PICO-8 Sprites",
+ "spacing":0,
+ "tilecount":256,
+ "tiledversion":"1.10.2",
+ "tileheight":8,
+ "tilewidth":8,
+ "type":"tileset",
+ "version":"1.10"
+}

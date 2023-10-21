@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://bk1ooqru18x18"]
+
+[ext_resource type="Script" path="res://Summary.gd" id="1_jm014"]
+
+[node name="summary" type="Node2D"]
+script = ExtResource("1_jm014")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 392.0
+offset_top = 216.0
+offset_right = 624.0
+offset_bottom = 368.0
+text = "SUMMARY"
+
+[node name="Retry" type="Button" parent="."]
+offset_left = 392.0
+offset_top = 416.0
+offset_right = 632.0
+offset_bottom = 552.0
+text = "Retry"
+
+[node name="Quit" type="Button" parent="."]
+offset_left = 392.0
+offset_top = 568.0
+offset_right = 632.0
+offset_bottom = 704.0
+text = "Quit to Menu "
+
+[connection signal="pressed" from="Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
