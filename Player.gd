@@ -4,10 +4,11 @@ extends CharacterBody2D
 const SPEED = 80
 const SPRINT_SPEED = 130
 const JUMP_VELOCITY = -240.0
-const SUPER_JUMP_VELOCITY = -290
+const SUPER_JUMP_VELOCITY = -300
 
 var cur_jump_velocity = JUMP_VELOCITY
 var cur_speed = SPEED
+var has_double_jump = true
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -17,7 +18,9 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func jump(is_super: bool):
 	if is_super:
 		cur_jump_velocity = SUPER_JUMP_VELOCITY
+		$SuperJumpWAV.play()
 	else:
+		$JumpWAV.play()
 		cur_jump_velocity = JUMP_VELOCITY
 	velocity.y = cur_jump_velocity
 	anim.play("jump")
@@ -38,16 +41,21 @@ func _physics_process(delta):
 			
 	# Land on floor
 	if is_on_floor():
+		has_double_jump = true
 		$CoyoteTime.start()
 		if $JumpTimer.time_left > 0: 
 			jump(false)
 
-	# Handle Jump.
+	# Handle Jumps
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or $CoyoteTime.time_left > 0):
 		if Input.is_action_pressed("down"):
 			jump(true)
 		else:
 			jump(false)
+			
+	if Input.is_action_just_pressed("jump") and velocity.y > 0 and has_double_jump:
+		jump(false)
+		has_double_jump = false
 		
 	# Handle sprint modifier
 	if Input.is_action_pressed("sprint"):

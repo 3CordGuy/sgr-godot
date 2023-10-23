@@ -3,6 +3,8 @@
 [ext_resource type="Script" path="res://Player.gd" id="1_fncfr"]
 [ext_resource type="SpriteFrames" uid="uid://d4hw23jkcogjx" path="res://player.tres" id="1_mitiy"]
 [ext_resource type="TileSet" uid="uid://0c1gtpr6qqba" path="res://tiles.tres" id="3_0xvgc"]
+[ext_resource type="AudioStream" uid="uid://b05rsqwlq1j1f" path="res://sounds/jump.wav" id="3_yfhaf"]
+[ext_resource type="AudioStream" uid="uid://bdccw4oachao2" path="res://sounds/duck-jump.wav" id="4_55jde"]
 [ext_resource type="Script" path="res://goal.gd" id="4_lg5ak"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4urxg"]
@@ -70,6 +72,12 @@ linear_accel_min = -3.3
 linear_accel_max = -3.3
 scale_amount_max = 4.0
 scale_amount_curve = SubResource("Curve_kuyd2")
+
+[node name="JumpWAV" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("3_yfhaf")
+
+[node name="SuperJumpWAV" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("4_55jde")
 
 [node name="Menu" type="Node2D" parent="."]
 position = Vector2(0, 15)
