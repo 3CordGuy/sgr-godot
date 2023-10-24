@@ -2,18 +2,25 @@ extends CharacterBody2D
 
 
 const SPEED = 80
-const SPRINT_SPEED = 130
-const JUMP_VELOCITY = -240.0
-const SUPER_JUMP_VELOCITY = -300
+const SPRINT_SPEED = 120
+const JUMP_VELOCITY = -235.0
+const SUPER_JUMP_VELOCITY = -280
 
 var cur_jump_velocity = JUMP_VELOCITY
 var cur_speed = SPEED
 var has_double_jump = true
+var milestone_count = 0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var anim = get_node("AnimatedSprite2D")
+
+
+func _on_milestone_collected():
+	print("collected 1")
+	milestone_count += 1
+
 
 func jump(is_super: bool):
 	if is_super:
@@ -28,6 +35,7 @@ func jump(is_super: bool):
 	$JumpTimer.stop()
 
 func _ready():
+	#get_parent().get_node("Level1").connect("milestone_collected", _on_milestone_collected) 
 	anim.play('idle')
 
 func _physics_process(delta):
@@ -108,3 +116,8 @@ func _on_goal_body_entered(body):
 	if body.name == "Player":
 		get_tree().change_scene_to_file("res://summary.tscn")
 	
+
+
+func _on_milestone_body_entered(body):
+	if body.name == "Player":
+		print(body)
